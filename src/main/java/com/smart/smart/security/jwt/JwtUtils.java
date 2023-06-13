@@ -18,7 +18,7 @@ public class JwtUtils {
     @Value("${ichraf.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${ichraf.app.jwtExpirationMs}")
+    @Value("100000000")
     private int jwtExpirationMs;
 
     public String generateJwtToken(UserDetailsImpl userPrincipal) {

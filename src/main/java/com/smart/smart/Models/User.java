@@ -86,4 +86,21 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_event",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> events = new HashSet<>();
+
+    public void addEvent(Event event) {
+        events.add(event);
+        event.getUsers().add(this);
+    }
+
+    public void removeEvent(Event event) {
+        events.remove(event);
+        event.getUsers().remove(this);
+    }
 }
